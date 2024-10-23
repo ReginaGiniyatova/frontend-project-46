@@ -1,15 +1,8 @@
 #!/usr/bin/env node
+import commander from 'commander';
 
-const { Command } = require('commander');
-const program = new Command();
-
-
-program
+commander
     .description('Compares two configuration files and shows a difference.')
-    .option('-V, --version', 'output the version number')
-    .option('--help', 'output usage information')
-    .action(() => {
-    console.log('hello');
-});
+    .version('0.0.1');
 
-program.parse();
+commander.parse(process.argv);
