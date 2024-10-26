@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { cwd } from 'node:process';
 import path from 'node:path';
 import parser from './parsers.js';
+import getDiff from './compare.js';
 
 const gendiff = (filepath1, filepath2) => {
     filepath1 = path.resolve(cwd(), filepath1);
@@ -16,8 +17,7 @@ const gendiff = (filepath1, filepath2) => {
     const obj1 = parser(json1, firstFileFormat);
     const obj2 = parser(json2, secondFileFormat);
 
-
-    console.log(obj1, obj2);
+    const intralTree = getDiff(obj1, obj2);
 };
 
 export default gendiff;
