@@ -18,6 +18,7 @@ const gendiff = (filepath1, filepath2) => {
     const obj2 = parser(json2, secondFileFormat);
 
     const intralTree = getDiff(obj1, obj2);
+    console.log(intralTree)
 };
 
 export default gendiff;

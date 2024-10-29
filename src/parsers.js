@@ -5,7 +5,7 @@ const parser = (file, format) => {
             return JSON.parse(file)
             break;
         case 'ini':
-            return init.parse(file)
+            return ini.parse(file)
             break;
         case 'yml':
             return yml.safeLoad(file)
