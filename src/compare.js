@@ -16,8 +16,7 @@ const getDiff = (obj1, obj2) => {
     })
 
     const result = data.flat().join('\n')
-
-    return `{\n ${result} \n}`
+    return `{\n${result}\n}`
 }
 
 
