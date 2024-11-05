@@ -27,3 +27,10 @@ test('compare Json files', () => {
     const intralTree = getDiff(obj1, obj2);
     expect(intralTree).toEqual(res);
 })
+
+test('throw an error', () => {
+    const res = readFile('expectedResult.txt').trim();
+    expect(() => {
+        parser(res, 'txt');
+    }).toThrow();
+})
