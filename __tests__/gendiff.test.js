@@ -4,6 +4,7 @@ import getDiff from '../src/compare.js';
 
 import { fileURLToPath } from 'url';
 import path from 'path';
+import gendiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,19 +19,27 @@ const readFile = (filename) => {
 
 test('compare Json files', () => {
     const res = readFile('expectedResult.txt').trim();
-    const json1 = readFile('file1.json').trim();
-    const json2 = readFile('file2.json').trim();
 
-    const obj1 = parser(json1, 'json');
-    const obj2 = parser(json2, 'json');
+    const path1 = `${process.cwd()}/__fixtures__/file1.json`;
+    const path2 = `${process.cwd()}/__fixtures__/file2.json`;
 
-    const intralTree = getDiff(obj1, obj2);
-    expect(intralTree).toEqual(res);
+    expect(gendiff(path1, path2)).toEqual(res);
 })
 
 test('throw an error', () => {
     const res = readFile('expectedResult.txt').trim();
     expect(() => {
         parser(res, 'txt');
-    }).toThrow();
+    }).toThrow()
 })
+
+test('compare yaml files', () => {
+    const res = readFile('expectedResult.txt').trim();
+
+    const path1 = `${process.cwd()}/__fixtures__/file1.yml`;
+    const path2 = `${process.cwd()}/__fixtures__/file2.yml`;
+
+    expect(gendiff(path1, path2)).toEqual(res);
+})
+
+

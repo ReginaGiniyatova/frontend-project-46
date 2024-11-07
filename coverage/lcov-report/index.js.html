@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for compare.js</title>
+    <title>Code coverage report for index.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> compare.js</h1>
+        <h1><a href="index.html">All files</a> index.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/23</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/23</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
@@ -85,18 +85,22 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -107,29 +111,31 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import _ from 'lodash';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { readFileSync } from 'node:fs';
+import { cwd } from 'node:process';
+import path from 'node:path';
+import parser from './parsers.js';
+import getDiff from './compare.js';
 &nbsp;
-const getDiff = (obj1, obj2) =&gt; {
-    const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
-    const data = keys.map((key) =&gt; {
-        if(!_.has(obj1, key) &amp;&amp; _.has(obj2, key)) {
-            return `  + ${key}: ${JSON.stringify(obj2[key])}`
-        }
-        if(!_.has(obj2, key) &amp;&amp; _.has(obj1, key)) {
-            return `  - ${key}: ${JSON.stringify(obj1[key])}`
-        }
-        if(!_.isEqual(obj1[key], obj2[key])) {
-            return [`  - ${key}: ${JSON.stringify(obj1[key])}`, `  + ${key} : ${JSON.stringify(obj2[key])}`]
-        }
-        return `    ${key}: ${JSON.stringify(obj1[key])}`
-    })
+const gendiff = (filepath1, filepath2) =&gt; {
+  filepath1 = path.resolve(cwd(), filepath1);
+  filepath2 = path.resolve(cwd(), filepath2);
 &nbsp;
-    const result = data.flat().join('\n')
-    return `{\n${result}\n}`
-}
+  const json1 = readFileSync(filepath1, 'utf-8');
+  const json2 = readFileSync(filepath2, 'utf-8');
 &nbsp;
+  const firstFileFormat = path.extname(filepath1).slice(1);
+  const secondFileFormat = path.extname(filepath2).slice(1);
 &nbsp;
-export default getDiff;</pre></td></tr></table></pre>
+  const obj1 = parser(json1, firstFileFormat);
+  const obj2 = parser(json2, secondFileFormat);
+&nbsp;
+  const intralTree = getDiff(obj1, obj2);
+  return intralTree;
+};
+&nbsp;
+export default gendiff;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

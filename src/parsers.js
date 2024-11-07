@@ -1,3 +1,4 @@
+import yaml from 'js-yaml';
 
 const parser = (file, format) => {
     switch (format) {
@@ -6,7 +7,7 @@ const parser = (file, format) => {
         case 'ini':
             return ini.parse(file)
         case 'yml':
-            return yml.safeLoad(file)
+            return yaml.load(file)
         default:
             throw new Error(`Unknown format: '${format}'`);
     } 
