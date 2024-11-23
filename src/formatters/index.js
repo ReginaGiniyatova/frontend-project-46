@@ -1,3 +1,5 @@
+import stylish from './stylish.js';
+
 
 const formatter = (result, formatStyle) => {
     switch (formatStyle) {

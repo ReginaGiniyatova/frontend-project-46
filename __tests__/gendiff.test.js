@@ -1,6 +1,5 @@
 import { readFileSync } from 'node:fs';
 import parser from '../src/parsers.js';
-import getDiff from '../src/compare.js';
 
 import { fileURLToPath } from 'url';
 import path from 'path';
