@@ -4,6 +4,7 @@ import parser from '../src/parsers.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import gendiff from '../src/index.js';
+import formatter from '../src/formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,6 +33,13 @@ test('throw an error', () => {
     }).toThrow()
 })
 
+test('throw style error', () => {
+    const res = readFile('expectedResult.txt').trim();
+    expect(() => {
+        formatter(res, 'txt');
+    }).toThrow()
+})
+
 test('compare yaml files', () => {
     const res = readFile('expectedResult.txt').trim();
 
@@ -40,5 +48,24 @@ test('compare yaml files', () => {
 
     expect(gendiff(path1, path2)).toEqual(res);
 })
+
+test('compare plain jsonFiles', () => {
+    const res = readFile('expectedResultPlain.txt').trim();
+
+    const path1 = `${process.cwd()}/__fixtures__/file1.json`;
+    const path2 = `${process.cwd()}/__fixtures__/file2.json`;
+
+    expect(gendiff(path1, path2, 'plain')).toEqual(res);
+})
+
+test('compare plain ymlFiles', () => {
+    const res = readFile('expectedResultPlain.txt').trim();
+
+    const path1 = `${process.cwd()}/__fixtures__/file1.yml`;
+    const path2 = `${process.cwd()}/__fixtures__/file2.yml`;
+
+    expect(gendiff(path1, path2, 'plain')).toEqual(res);
+})
+
 
 
