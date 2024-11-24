@@ -22,6 +22,9 @@ gendiff-yml:
 gendiff-plain:
 	node bin/gendiff.js ./__fixtures__/file1.json ./__fixtures__/file2.json -f plain
 
+gendiff-plain-yml:
+	node bin/gendiff.js ./__fixtures__/file1.yml ./__fixtures__/file2.yml -f plain
+
 test: 
 	npm test
 
