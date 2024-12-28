@@ -7,6 +7,7 @@
   "scripts": {
     "test": "npx jest"
   },
+  "bin": { "gendiff": "bin/gendiff.js" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ReginaGiniyatova/frontend-project-46.git"

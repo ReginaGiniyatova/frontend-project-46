@@ -20,7 +20,6 @@ const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
 
   const intralTree = getDiff(obj1, obj2);
   const result = format(intralTree, formatName)
-  // console.log('result', result)
   return result;
 };
 
