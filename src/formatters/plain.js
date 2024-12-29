@@ -8,17 +8,17 @@ const getVarFormat = (value) => {
 };
 
 const formatText = (state, path, values) => {
-  let [oldValue, newValue] = values;
-  oldValue = getVarFormat(oldValue);
-  newValue = getVarFormat(newValue);
+  const [oldValue, newValue] = values;
+  const oldValue1 = getVarFormat(oldValue);
+  const newValue2 = getVarFormat(newValue);
 
   switch (state) {
     case 'added':
-      return `Property '${path}' was added with value: ${oldValue}`;
+      return `Property '${path}' was added with value: ${oldValue1}`;
     case 'deleted':
       return `Property '${path}' was removed`;
     case 'changed':
-      return `Property '${path}' was updated. From ${oldValue} to ${newValue}`;
+      return `Property '${path}' was updated. From ${oldValue1} to ${newValue2}`;
     default: return '';
   }
 };
