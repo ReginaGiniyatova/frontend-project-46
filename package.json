@@ -7,7 +7,9 @@
   "scripts": {
     "test": "npx jest"
   },
-  "bin": { "gendiff": "bin/gendiff.js" },
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ReginaGiniyatova/frontend-project-46.git"
@@ -30,6 +32,7 @@
   },
   "homepage": "https://github.com/ReginaGiniyatova/frontend-project-46#readme",
   "dependencies": {
+    "@jest/globals": "^29.7.0",
     "commander": "^5.1.0",
     "jest": "^29.7.0",
     "js-yaml": "^4.1.0",

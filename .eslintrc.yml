@@ -2,15 +2,6 @@ parserOptions:
   ecmaVersion: 2020
 rules:
   no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
-
-extends:
-  - airbnb-base
-
-env:
-  node: true
-  es2020: true
-
-rules:
   no-console: 0
   import/extensions: 0
   no-await-in-loop: 0
@@ -21,3 +12,10 @@ rules:
   fp/no-throw: 0
   fp/no-mutation: 0
   fp/no-mutating-methods: 0
+
+extends:
+  - airbnb-base
+
+env:
+  node: true
+  es2020: true
