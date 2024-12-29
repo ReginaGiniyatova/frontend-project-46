@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const getDiff = (obj1, obj2) => {
-  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+  let keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
   const ast = keys.map((key) => {
     if (!_.has(obj1, key)) {
       return { key, state: 'added', value: obj2[key] };
