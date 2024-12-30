@@ -2,8 +2,8 @@ import _ from 'lodash';
 
 const getDiff = (obj1, obj2) => {
   const keys = _.union(Object.keys(obj1), Object.keys(obj2));
-  const sortedKeys = keys.slice().sort();
-  
+  const sortedKeys = keys.slice().sort(); // eslint-disable-line
+
   const ast = sortedKeys.map((key) => {
     if (!_.has(obj1, key)) {
       return { key, state: 'added', value: obj2[key] };
